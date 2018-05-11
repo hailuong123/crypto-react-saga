@@ -13,6 +13,9 @@
 .DS_Store
 .env
 
+# template
+/tabler
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

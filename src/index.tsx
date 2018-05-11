@@ -6,21 +6,21 @@ import { Router } from 'react-router';
 import registerServiceWorker from './registerServiceWorker';
 
 import history from './utility/history';
+import { store } from './store';
 
-function App() {
+import App from './modules/App';
+function WebApp() {
   return (
-    <Provider store={undefined}>
+    <Provider store={store}>
       <Router history={history}>
-        <div>
-          To do
-        </div>
+        <App />
       </Router>
     </Provider>
   );
 }
 
 export const app = ReactDOM.render(
-  <App />, document.getElementById('root') as HTMLElement
+  <WebApp />, document.getElementById('root') as HTMLElement
 );
 
 registerServiceWorker();
