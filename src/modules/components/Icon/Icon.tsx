@@ -2,14 +2,19 @@ import * as React from 'react';
 
 interface Props {
   className?: string;
-  prefix?: 'fe' | 'fa';
+  prefix?: string;
+  fontSize?: number;
+  decimals?: string;
 }
 
 class Icon extends React.Component<Props, {}> {
   render() {
-    const { className, prefix } = this.props;
+    const { className, prefix, fontSize, decimals } = this.props;
     return (
-      <i className={`${prefix} ${prefix}-${className}`} />
+      <i 
+        className={`${prefix ? prefix : 'fe'} ${prefix ? prefix : 'fe'}-${className}`} 
+        style={{fontSize: `${fontSize}${decimals}`}} 
+      />
     );
   }
 }

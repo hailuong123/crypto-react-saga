@@ -7,6 +7,7 @@ interface Props {
   icon?: string;
   name: string;
   value?: any;
+  unit?: string;
   type?: string;
   errors?: any;
   placeHolder?: string;
@@ -54,7 +55,8 @@ class Input extends Component<Props, State> {
       placeHolder, 
       name, 
       type, 
-      value, 
+      value,
+      unit,
       icon,
       checked,
       disabled,
@@ -65,27 +67,35 @@ class Input extends Component<Props, State> {
         <React.Fragment>
           { 
             type === 'checkbox' || type === 'radio' ? (
-              <input 
-                className={className}
-                type={type}
-                name={name}
-                value={value}
-                disabled={disabled}
-                checked={checked}
-                readOnly={readOnly}
-                onChange={this.onChange}
-              />
+              <>
+                <input 
+                  className={className}
+                  type={type}
+                  name={name}
+                  value={value}
+                  disabled={disabled}
+                  checked={checked}
+                  readOnly={readOnly}
+                  onChange={this.onChange}
+                />
+                {unit && <span className="unit">{unit}</span>}
+              </>
+              
             ) : (
-              <input 
-                className={className}
-                placeholder={placeHolder}
-                type={type}
-                name={name}
-                value={value}
-                disabled={disabled}
-                readOnly={readOnly}
-                onChange={this.onChange}
-              />
+              <>
+                <input 
+                  className={className}
+                  placeholder={placeHolder}
+                  type={type}
+                  name={name}
+                  value={value}
+                  disabled={disabled}
+                  readOnly={readOnly}
+                  onChange={this.onChange}
+                />
+                {unit && <span className="unit">{unit}</span>}
+              </>
+              
             )
           }
         </React.Fragment>
@@ -104,6 +114,7 @@ class Input extends Component<Props, State> {
             readOnly={readOnly}
             onChange={this.onChange}
           />
+          {unit && <span className="unit">{unit}</span>}
         </div>
       )
     );

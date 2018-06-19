@@ -2,25 +2,25 @@ import * as React from 'react';
 import { Icon } from '../';
 
 interface Props {
-  link?: boolean;
   disabled?: boolean;
-  child?: any;
+  children?: any;
   icon?: string;
   className?: string;
   to?: string;
   color?: string;
-  RootComponent: Tag;
-  type?: Type;
+  RootComponent: 'button' | 'a' | 'input';
+  type?: 'button' | 'submit' | 'reset';
   onClick?: Function;
+  name?: string;
 }
 
-enum Type {
+export enum Type {
   button = 'button',
   submit = 'submit',
   reset = 'reset'
 }
 
-enum Tag {
+export enum Tag {
   button = 'button',
   a = 'a',
   input = 'input'
@@ -40,13 +40,15 @@ class Button extends React.Component<Props, State> {
 
   render() {
     const {
+      children,
       disabled,
       icon,
       className,
       to,
       color,
       RootComponent,
-      type
+      type,
+      name
     } = this.props;
 
     const contentAll = (
@@ -56,13 +58,13 @@ class Button extends React.Component<Props, State> {
             <Icon prefix="fe" className={className} />
           ) : null
         }
-        {React.Children}
+        {children}
       </>
     );
 
     if (!RootComponent || RootComponent === Tag.button) {
       return (
-        <button type={type} color={color} className={className} disabled={disabled} onClick={this.onClick}>
+        <button type={type} color={color} className={className} name={name} disabled={disabled} onClick={this.onClick}>
           {contentAll}
         </button>
       );
@@ -74,7 +76,7 @@ class Button extends React.Component<Props, State> {
       );
     } else if (RootComponent === Tag.input) {
       return (
-        <input type={type} className={className} color={color} disabled={disabled} onClick={this.onClick} />
+        <input type={type} className={className} color={color} name={name} disabled={disabled} onClick={this.onClick} />
       );
     } else {
       const ComponentButton: any = RootComponent;
